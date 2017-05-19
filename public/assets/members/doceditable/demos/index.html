@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Demos - DocEditable</title>
+    <meta name="description" content="">
+
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/codemirror.css" rel="stylesheet">
+    <link href="../css/doceditable.css" rel="stylesheet">
+    <link href="../css/doc.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="../">Home</a></li>
+          <li><a href="../doc/">Documentation</a></li>
+          <li class="active"><a href=".">Demos</a></li>
+          <li><a href="../test/">Tests</a></li>
+          <li><a href="https://github.com/Foliotek/DocEditable">Github</a></li>
+        </ul>
+        <h1 class="muted">DocEditable</h1>
+      </div>
+
+      <hr>
+
+  	<h2>Demos</h2>
+
+    <p>More demos are coming soon.  Still working on building this portion of the site.</p>
+    	<div class="row-fluid marketing">
+      	<div class="span12">
+            <h4>Markdown Support</h4>
+<textarea id="markdown1" name="markdown1">
+## Heading
+Render **m*a*r*k*down** here
+
+test
+</textarea>
+  		</div>
+  	</div>
+
+    <h3>Experimental Demos (will break)</h3>
+    <ul>
+        <li><a href='ot.html'>Operational Transformation</a></li>
+        <li><a href='undo.html'>Undo/Redo with Markers and Headings</a></li>
+    </ul>
+
+    <script src="../js/jquery-1.9.1.js"></script>
+    <script src="../js/codemirror.js"></script>
+    <script src="../js/doceditable.js"></script>
+    <script src="../js/bootstrap.js"></script>
+    <script src="../js/markdown.js"></script>
+    
+    <script>
+    $(function() {
+
+      var md = DocEditable.fromTextArea(document.getElementById("markdown1"), {
+        format: 'markdown'
+      });
+
+    });
+    </script>
+
+  </body>
+</html>

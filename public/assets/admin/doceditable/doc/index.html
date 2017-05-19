@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>Documentation - DocEditable</title>
+    <meta name="description" content="">
+
+    <link href="../css/bootstrap.css" rel="stylesheet">
+    <link href="../css/codemirror.css" rel="stylesheet">
+    <link href="../css/doceditable.css" rel="stylesheet">
+    <link href="../css/doc.css" rel="stylesheet">
+  </head>
+
+  <body>
+
+    <div class="container">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li><a href="../">Home</a></li>
+          <li class="active"><a href=".">Documentation</a></li>
+          <li><a href="../demos/">Demos</a></li>
+          <li><a href="../test">Tests</a></li>
+          <li><a href="https://github.com/Foliotek/DocEditable">Github</a></li>
+        </ul>
+        <h1 class="muted">DocEditable</h1>
+      </div>
+
+      <hr>
+
+      <h2>Documentation</h2>
+
+      <p>
+        Note: <strong>DocEditable is in a very early stage of development</strong>.  Right now there may be some things that don't work, and the API may be changing.  Please contribute if you'd like to help out!  Send me an email at brian@foliotek.com or open an issue over on <a href='https://github.com/Foliotek/DocEditable/issues'>github</a> if you'd like to help!
+      </p>
+      <p>
+        We have an approximate <a href='https://github.com/Foliotek/DocEditable/wiki/DocEditable-Roadmap'>roadmap on the wiki</a> if you'd like to contribute to the big picture idea.
+      </p>
+
+
+      <h3>The Markup</h3>
+
+      <p>
+        This is the bare minimum you need to get started.  <a style='display:none;' href='#'>See an example of this online</a>
+      </p>
+<pre class="prettyprint language-html">
+&lt;head&gt;
+  &lt;link href=&quot;../css/bootstrap.css&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link href=&quot;../css/codemirror.css&quot; rel=&quot;stylesheet&quot;&gt;
+  &lt;link href=&quot;../css/doceditable.css&quot; rel=&quot;stylesheet&quot;&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;textarea id=&quot;doc&quot;&gt;Lorem Ipsum&lt;/textarea&gt;
+
+  &lt;script src=&quot;../js/jquery-1.9.1.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../js/codemirror.js&quot;&gt;&lt;/script&gt;
+  &lt;script src=&quot;../js/doceditable.js&quot;&gt;&lt;/script&gt;
+&lt;/body&gt;
+</pre>
+
+<pre class="prettyprint language-html">
+  &lt;script&gt;
+  var docEditable = DocEditable.fromTextArea(document.getElementById("doc") /*, options */ );
+  &lt;/script&gt;
+</pre>
+
+
+      <h3>Initialization</h3>
+      <p>
+        You can create DocEditable with a container element (just as in <a href='http://codemirror.net/doc/manual.html'>CodeMirror</a>).
+      </p>
+
+<pre class="prettyprint language-js">
+var docEditable1 = DocEditable(document.getElementById("container"), options);
+</pre>
+
+      <p>
+        Or you can use a helper <code>fromTextArea</code> function, which is a nice shortcut that will copy the changed values back into the textarea as changes happen.
+      </p>
+
+<pre class="prettyprint language-js">
+var docEditable2 = DocEditable.fromTextArea(document.getElementById("doc"), options);
+</pre>
+
+      <p>
+        If you want to use custom CodeMirror options you can create the CodeMirror first then pass it in to the constructor:
+      </p>
+
+<pre class="prettyprint language-js">
+var myCodeMirror = CodeMirror(document.body, {
+  value: "function myScript(){return 100;}\n",
+  mode:  "javascript"
+});
+var docEditable3 = DocEditable(myCodeMirror, options);
+</pre>
+
+      <h3>Options</h3>
+
+      <div class="opt">
+        <p class="prop" id="options-format">
+        format (string)
+        </p>
+        <div class="desc">
+          <p>
+          The format to load the value within the editor as.  Possible values are <code>html</code> and <code>markdown</code>  This will process the value through <code>DocEditable.importers[format]</code>.  Read more about <a href='#importers'>importers</a>.
+        </p>
+
+<pre class="prettyprint language-js">
+var markdownEditable = DocEditable.fromTextArea(document.getElementById("doc"), {
+  format: 'markdown'
+});
+</pre>
+        </div>
+      </div>
+
+      <h3>Methods</h3>
+
+
+<div class="opt">
+<p class="prop" id="options-loadJSON">
+loadJSON()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-setValue">
+setValue()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-getValue">
+getValue()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-toMarkdown">
+toMarkdown()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-toHTML">
+toHTML()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-removeFormatting">
+removeFormatting()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-bold">
+bold()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-annotate">
+annotate()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-italic">
+italic()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-underline">
+underline()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-strikethrough">
+strikethrough()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-img">
+img()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-linesAreList">
+linesAreList()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-list">
+list()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-formatBlock">
+formatBlock()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-unformatBlock">
+unformatBlock()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-isRangeMarked">
+isRangeMarked()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-addUndoState">
+addUndoState()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-formatText">
+formatText()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-getActiveMarks">
+getActiveMarks()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-getActiveBlock">
+getActiveBlock()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-on">
+on()
+</p>
+<div class="desc">
+
+</p>
+</div>
+<div class="opt">
+<p class="prop" id="options-off">
+off()
+</p>
+<div class="desc">
+
+</p>
+</div>
+
+
+      <h3>Customization</h3>
+
+<pre id="importers">
+DocEdtiable.importers
+</pre>
+<p class="desc">
+  Specificy a custom formatter
+</p>
+
+    </div> <!-- /container -->
+
+    <script src="../js/jquery-1.9.1.js"></script>
+    <script src="../js/bootstrap.js"></script>
+
+  </body>
+</html>
